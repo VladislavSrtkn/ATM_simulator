@@ -8,21 +8,34 @@ const USDollar = [
   { value: 1, count: 0 },
 ];
 
-//_______________________________________________________________________
-// value - note`s value
-// count - count of banknotes
-// a - number of banknotes for required amount
+const thaiBat = [
+  { value: 1000, count: 0 },
+  { value: 500, count: 0 },
+  { value: 100, count: 0 },
+  { value: 50, count: 0 },
+  { value: 20, count: 0 },
+];
 
 function bank(currency, amount) {
-  for (const note of currency) {
-    let value = note['value'];
-    let count = note['count'];
-    let a = Math.floor(amount / value);
-    count += a;
-    amount -= a * value;
+  let result = [];
 
-    console.log(value, count);
+  for (const note of currency) {
+    let value = note.value;
+    let count = note.count;
+    let numberForCurrentNote = Math.floor(amount / value);
+
+    count = numberForCurrentNote;
+    amount -= numberForCurrentNote * value;
+
+    if (count > 0) {
+      result.push({ value, count });
+    }
   }
+  if (amount != 0) {
+    throw new Error('error message');
+  }
+
+  return result;
 }
 
-bank(USDollar, 1754);
+console.log(bank(thaiBat, 3570));
