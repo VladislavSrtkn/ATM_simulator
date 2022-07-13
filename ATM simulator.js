@@ -1,4 +1,4 @@
-const USDollar = [
+const dollarUSA = [
   { value: 100, count: 0 },
   { value: 50, count: 0 },
   { value: 20, count: 0 },
@@ -8,7 +8,7 @@ const USDollar = [
   { value: 1, count: 0 },
 ];
 
-const thaiBat = [
+const batThailand = [
   { value: 1000, count: 0 },
   { value: 500, count: 0 },
   { value: 100, count: 0 },
@@ -16,9 +16,11 @@ const thaiBat = [
   { value: 20, count: 0 },
 ];
 
+let userAmoun = document.querySelector('#userAmount');
+let cashResult = document.querySelector('#result');
+
 function bank(currency, amount) {
   let result = [];
-
   for (const note of currency) {
     let value = note.value;
     let count = note.count;
@@ -34,8 +36,6 @@ function bank(currency, amount) {
   if (amount != 0) {
     throw new Error('error message');
   }
-
+  cashResult.innerHTML = JSON.stringify(result);
   return result;
 }
-
-console.log(bank(thaiBat, 3570));

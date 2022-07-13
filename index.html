@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATM Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="title">ATM</h1>
+    <div class="currency-selection">
+      <input type="radio" name="currency-selection" id="USD" checked />
+      <label for="USD">USD</label>
+      <input type="radio" name="currency-selection" id="THBs" />
+      <label for="THB">Thailand BAT</label>
+
+      <input type="number" id="userAmount" />
+      <hr />
+
+      <button type="submit" onclick="bank(dollarUSA,userAmount.value)">
+        Get Cash
+      </button>
+      <h2 id="result"></h2>
+    </div>
+
+    <script src="./ATM simulator.js"></script>
+  </body>
+</html>
