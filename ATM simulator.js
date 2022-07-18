@@ -8,18 +8,44 @@ const dollarUSA = [
   { value: 1, count: 0 },
 ];
 
-const batThailand = [
+const hryvniaUkraine = [
+  { value: 500, count: 0 },
+  { value: 200, count: 0 },
+  { value: 100, count: 0 },
+  { value: 50, count: 0 },
+  { value: 20, count: 0 },
+  { value: 10, count: 0 },
+  { value: 5, count: 0 },
+  { value: 2, count: 0 },
+  { value: 1, count: 0 },
+];
+
+const yenJapan = [
+  { value: 10000, count: 0 },
+  { value: 5000, count: 0 },
+  { value: 2000, count: 0 },
   { value: 1000, count: 0 },
   { value: 500, count: 0 },
   { value: 100, count: 0 },
   { value: 50, count: 0 },
-  { value: 20, count: 0 },
+  { value: 10, count: 0 },
+  { value: 5, count: 0 },
+  { value: 1, count: 0 },
 ];
 
-let userAmoun = document.querySelector('#userAmount');
+let userAmount = document.querySelector('#userAmount');
 let cashResult = document.querySelector('#result');
+let currency;
 
 function bank(currency, amount) {
+  if (USD.checked) {
+    currency = dollarUSA;
+  } else if (JPY.checked) {
+    currency = yenJapan;
+  } else if (UAH.checked) {
+    currency = hryvniaUkraine;
+  }
+
   let result = [];
   for (const note of currency) {
     let value = note.value;

@@ -10,15 +10,23 @@
   <body>
     <h1 class="title">ATM</h1>
     <div class="currency-selection">
-      <input type="radio" name="currency-selection" id="USD" checked />
-      <label for="USD">USD</label>
-      <input type="radio" name="currency-selection" id="THBs" />
-      <label for="THB">Thailand BAT</label>
+      <input
+        type="radio"
+        name="currency-selection"
+        id="USD"
+        value="USD"
+        checked
+      />
+      <label for="USD">US Dollar</label>
+      <input type="radio" name="currency-selection" id="JPY" value="JPY" />
+      <label for="THB">Japanese yen</label>
+      <input type="radio" name="currency-selection" id="UAH" value="UAH" />
+      <label for="THB">Ukrainian hryvnia</label>
 
       <input type="number" id="userAmount" />
       <hr />
 
-      <button type="submit" onclick="bank(dollarUSA,userAmount.value)">
+      <button type="submit" onclick="bank(currency,userAmount.value)">
         Get Cash
       </button>
       <h2 id="result"></h2>
