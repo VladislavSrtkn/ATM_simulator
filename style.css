@@ -12,6 +12,7 @@
 body {
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+  font-family: 'Kanit', sans-serif;
 }
 
 .cover-container {
@@ -48,4 +49,8 @@ body {
 
 #cashWithdraw h5 {
   color: #e5d504;
+}
+
+h1 {
+  text-shadow: 0 0 4px white;
 }
