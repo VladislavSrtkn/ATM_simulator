@@ -20,9 +20,20 @@ body {
   min-height: 100vh;
 }
 
+#cashWithdraw h5 {
+  color: #e5d504;
+}
+
+h1 {
+  text-shadow: 0 0 4px white;
+}
+
 /*
  * Header
  */
+header h3 {
+  color: #e5d504;
+}
 
 .nav-masthead .nav-link {
   color: rgba(255, 255, 255, 0.5);
@@ -45,12 +56,4 @@ body {
 
 .btn-outline-secondary {
   width: 33.33%;
-}
-
-#cashWithdraw h5 {
-  color: #e5d504;
-}
-
-h1 {
-  text-shadow: 0 0 4px white;
 }
