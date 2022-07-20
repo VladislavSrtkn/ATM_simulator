@@ -75,7 +75,7 @@ function bank(currency, amount) {
   }
 
   for (const finNotes of result) {
-    let container = document.createElement('h6');
+    let container = document.createElement('h5');
     container.innerHTML =
       currencyLabel +
       JSON.stringify(finNotes.value) +
