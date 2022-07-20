@@ -36,15 +36,23 @@ const yenJapan = [
 let userAmount = document.querySelector('#userAmount');
 let cashResult = document.querySelector('#result');
 let currency;
+let currencyLabel;
+
+let cashWithdraw = document.getElementById('cashWithdraw');
 
 function bank(currency, amount) {
   if (USD.checked) {
     currency = dollarUSA;
+    currencyLabel = '$';
   } else if (JPY.checked) {
     currency = yenJapan;
+    currencyLabel = '¥';
   } else if (UAH.checked) {
     currency = hryvniaUkraine;
+    currencyLabel = '₴';
   }
+
+  cashWithdraw.innerHTML = '';
 
   let result = [];
   for (const note of currency) {
@@ -60,8 +68,21 @@ function bank(currency, amount) {
     }
   }
   if (amount != 0) {
+    let errorMessage = document.createElement('h3');
+    errorMessage.innerHTML = 'Error';
+    cashWithdraw.append(errorMessage);
     throw new Error('error message');
   }
-  cashResult.innerHTML = JSON.stringify(result);
+
+  for (const finNotes of result) {
+    let container = document.createElement('h6');
+    container.innerHTML =
+      currencyLabel +
+      JSON.stringify(finNotes.value) +
+      '  x  ' +
+      JSON.stringify(finNotes.count);
+    cashWithdraw.append(container);
+  }
+
   return result;
 }

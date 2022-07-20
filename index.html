@@ -1,35 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ATM Simulator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="title">ATM</h1>
-    <div class="currency-selection">
-      <input
-        type="radio"
-        name="currency-selection"
-        id="USD"
-        value="USD"
-        checked
-      />
-      <label for="USD">US Dollar</label>
-      <input type="radio" name="currency-selection" id="JPY" value="JPY" />
-      <label for="THB">Japanese yen</label>
-      <input type="radio" name="currency-selection" id="UAH" value="UAH" />
-      <label for="THB">Ukrainian hryvnia</label>
+  <body class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0">Just a bank</h3>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a
+              class="nav-link fw-bold py-1 px-0 active"
+              aria-current="page"
+              href="#"
+            >
+              Home
+            </a>
+            <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
+            <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
+          </nav>
+        </div>
+      </header>
 
-      <input type="number" id="userAmount" />
-      <hr />
+      <main class="px-3">
+        <h1>ATM</h1>
+        <p class="lead">
+          Please select a currency from the list below and enter the amount. ATM
+          only accepts banknotes.
+        </p>
+      </main>
+      <div
+        class="btn-group my-4"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        <input
+          type="radio"
+          class="btn-check"
+          name="currency-selection"
+          id="USD"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-secondary" for="USD">US Dollar</label>
 
-      <button type="submit" onclick="bank(currency,userAmount.value)">
-        Get Cash
-      </button>
-      <h2 id="result"></h2>
+        <input
+          type="radio"
+          class="btn-check"
+          name="currency-selection"
+          id="JPY"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-secondary" for="JPY">Japanese yen</label>
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="currency-selection"
+          id="UAH"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-secondary" for="UAH">
+          Ukrainian hryvnia
+        </label>
+      </div>
+
+      <div class="currency-selection">
+        <input type="number" placeholder="100" id="userAmount" />
+
+        <p class="py-4">
+          <button
+            type="submit"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+            onclick="bank(currency,userAmount.value)"
+          >
+            Get Cash
+          </button>
+        </p>
+      </div>
+
+      <div id="cashWithdraw"></div>
+
+      <footer class="mt-auto text-white-50">
+        <p>
+          Made by
+          <a
+            href="https://github.com/VladislavSrtkn"
+            class="text-white text-decoration-none"
+          >
+            Vladislav Sirotkin
+          </a>
+          on
+          <a
+            href="https://getbootstrap.com/"
+            class="text-white text-decoration-none"
+          >
+            Bootstrap
+          </a>
+          template.
+        </p>
+      </footer>
     </div>
 
     <script src="./ATM simulator.js"></script>
