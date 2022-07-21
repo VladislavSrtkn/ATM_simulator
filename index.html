@@ -82,7 +82,12 @@
       </div>
 
       <div>
-        <input type="number" placeholder="100" id="userAmount" />
+        <input
+          type="number"
+          placeholder="100"
+          id="userAmount"
+          oninput="validity.valid||(value='')"
+        />
 
         <p class="py-4">
           <button
