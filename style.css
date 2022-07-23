@@ -5,6 +5,11 @@
   text-shadow: none; /*Prevent inheritance from `body`*/
 }
 
+h2,
+h3 {
+  color: #e5d504;
+}
+
 /*
  * Base structure
  */
@@ -20,13 +25,6 @@ body {
   min-height: 100vh;
 }
 
-#cashWithdraw h3 {
-  color: #e5d504;
-}
-#cashWithdraw {
-  min-height: 250px;
-}
-
 h1 {
   text-shadow: 0 0 4px white;
 }
@@ -34,9 +32,6 @@ h1 {
 /*
  * Header
  */
-header h3 {
-  color: #e5d504;
-}
 
 .nav-masthead .nav-link {
   color: rgba(255, 255, 255, 0.5);
