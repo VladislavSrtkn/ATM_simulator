@@ -81,24 +81,25 @@
         </label>
       </div>
 
-      <div>
+      <form onsubmit="event.preventDefault(); bank(currency,userAmount.value)">
         <input
+          class="form-control form-control-lg"
           type="number"
           placeholder="100"
           id="userAmount"
           oninput="validity.valid||(value='')"
         />
+      </form>
 
-        <p class="py-4">
-          <button
-            type="submit"
-            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
-            onclick="bank(currency,userAmount.value)"
-          >
-            Get Cash
-          </button>
-        </p>
-      </div>
+      <p class="py-4">
+        <button
+          type="submit"
+          class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+          onclick="bank(currency,userAmount.value)"
+        >
+          Get Cash
+        </button>
+      </p>
 
       <div id="cashWithdraw" class="mb-5"></div>
 

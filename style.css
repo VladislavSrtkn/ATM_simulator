@@ -20,8 +20,11 @@ body {
   min-height: 100vh;
 }
 
-#cashWithdraw h5 {
+#cashWithdraw h3 {
   color: #e5d504;
+}
+#cashWithdraw {
+  min-height: 250px;
 }
 
 h1 {

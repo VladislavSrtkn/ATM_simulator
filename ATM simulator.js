@@ -40,7 +40,20 @@ let currencyLabel;
 
 let cashWithdraw = document.getElementById('cashWithdraw');
 
+function errorMessage() {
+  let errorMessage = document.createElement('h3');
+  errorMessage.innerHTML = 'Error';
+  cashWithdraw.append(errorMessage);
+  throw new Error('error message');
+}
+
 function bank(currency, amount) {
+  cashWithdraw.innerHTML = '';
+
+  if (!amount || amount == 0) {
+    errorMessage();
+  }
+
   if (USD.checked) {
     currency = dollarUSA;
     currencyLabel = '$';
@@ -51,8 +64,6 @@ function bank(currency, amount) {
     currency = hryvniaUkraine;
     currencyLabel = '₴';
   }
-
-  cashWithdraw.innerHTML = '';
 
   let result = [];
   for (const note of currency) {
@@ -68,14 +79,11 @@ function bank(currency, amount) {
     }
   }
   if (amount != 0) {
-    let errorMessage = document.createElement('h3');
-    errorMessage.innerHTML = 'Error';
-    cashWithdraw.append(errorMessage);
-    throw new Error('error message');
+    errorMessage();
   }
 
   for (const finNotes of result) {
-    let container = document.createElement('h5');
+    let container = document.createElement('h3');
     container.innerHTML =
       currencyLabel +
       JSON.stringify(finNotes.value) +
