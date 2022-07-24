@@ -39,13 +39,25 @@ let cashWithdraw = document.getElementById('cashWithdraw');
 
 let currency;
 let currencyLabel;
-let result = [];
 
 function errorMessage() {
   let errorMessage = document.createElement('h3');
   errorMessage.innerHTML = 'Error';
   cashWithdraw.append(errorMessage);
   throw new Error('error message');
+}
+
+function displayBills(result) {
+  for (const withdrawNotes of result) {
+    let container = document.createElement('h3');
+    container.innerHTML =
+      currencyLabel +
+      JSON.stringify(withdrawNotes.value) +
+      '  x  ' +
+      JSON.stringify(withdrawNotes.count);
+    cashWithdraw.append(container);
+  }
+  return result;
 }
 
 function getBills(currency, amount) {
@@ -63,6 +75,7 @@ function getBills(currency, amount) {
     currency = hryvniaUkraine;
     currencyLabel = '₴';
   }
+  let result = [];
 
   for (const note of currency) {
     let value = note.value;
@@ -81,24 +94,12 @@ function getBills(currency, amount) {
     errorMessage();
   }
 
-  return result;
-}
+  displayBills(result);
 
-function displayBills(result) {
-  for (const withdrawNotes of result) {
-    let container = document.createElement('h3');
-    container.innerHTML =
-      currencyLabel +
-      JSON.stringify(withdrawNotes.value) +
-      '  x  ' +
-      JSON.stringify(withdrawNotes.count);
-    cashWithdraw.append(container);
-  }
+  return result;
 }
 
 function processAtmFormSubmit(currency, amount) {
   cashWithdraw.innerHTML = '';
-
   getBills(currency, amount);
-  displayBills(result);
 }
