@@ -34,11 +34,16 @@ const yenJapan = [
 ];
 
 let userAmount = document.querySelector('#userAmount');
-let cashResult = document.querySelector('#result');
 let cashWithdraw = document.getElementById('cashWithdraw');
+let atmForm = document.getElementById('atm');
 
 let currency;
 let currencyLabel;
+
+atmForm.onclick = function clearUserAmountInput(event) {
+  if (event.target.className != 'btn-check') return;
+  userAmount.value = '';
+};
 
 function errorMessage() {
   let errorMessage = document.createElement('h3');
@@ -93,7 +98,6 @@ function getBills(currency, amount) {
   if (amount != 0) {
     errorMessage();
   }
-
   displayBills(result);
 
   return result;
