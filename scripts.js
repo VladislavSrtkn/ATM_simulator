@@ -35,10 +35,11 @@ const yenJapan = [
 
 let userAmount = document.querySelector('#userAmount');
 let cashResult = document.querySelector('#result');
+let cashWithdraw = document.getElementById('cashWithdraw');
+
 let currency;
 let currencyLabel;
-
-let cashWithdraw = document.getElementById('cashWithdraw');
+let result = [];
 
 function errorMessage() {
   let errorMessage = document.createElement('h3');
@@ -47,9 +48,7 @@ function errorMessage() {
   throw new Error('error message');
 }
 
-function bank(currency, amount) {
-  cashWithdraw.innerHTML = '';
-
+function getBills(currency, amount) {
   if (!amount || amount == 0) {
     errorMessage();
   }
@@ -65,7 +64,6 @@ function bank(currency, amount) {
     currencyLabel = '₴';
   }
 
-  let result = [];
   for (const note of currency) {
     let value = note.value;
     let count = note.count;
@@ -78,19 +76,29 @@ function bank(currency, amount) {
       result.push({ value, count });
     }
   }
+
   if (amount != 0) {
     errorMessage();
   }
 
-  for (const finNotes of result) {
+  return result;
+}
+
+function displayBills(result) {
+  for (const withdrawNotes of result) {
     let container = document.createElement('h3');
     container.innerHTML =
       currencyLabel +
-      JSON.stringify(finNotes.value) +
+      JSON.stringify(withdrawNotes.value) +
       '  x  ' +
-      JSON.stringify(finNotes.count);
+      JSON.stringify(withdrawNotes.count);
     cashWithdraw.append(container);
   }
+}
 
-  return result;
+function processAtmFormSubmit(currency, amount) {
+  cashWithdraw.innerHTML = '';
+
+  getBills(currency, amount);
+  displayBills(result);
 }

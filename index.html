@@ -45,43 +45,48 @@
           only accepts banknotes.
         </p>
       </main>
-      <div
-        class="btn-group my-4"
-        role="group"
-        aria-label="Basic radio toggle button group"
+
+      <form
+        onsubmit="event.preventDefault(); processAtmFormSubmit(currency,userAmount.value)"
       >
-        <input
-          type="radio"
-          class="btn-check"
-          name="currency-selection"
-          id="USD"
-          autocomplete="off"
-          checked
-        />
-        <label class="btn btn-outline-secondary" for="USD">US dollar</label>
+        <div
+          class="btn-group my-4 w-100"
+          role="group"
+          aria-label="Basic radio toggle button group"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="currency-selection"
+            id="USD"
+            autocomplete="off"
+            checked
+          />
+          <label class="btn btn-outline-secondary" for="USD">US dollar</label>
 
-        <input
-          type="radio"
-          class="btn-check"
-          name="currency-selection"
-          id="JPY"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-secondary" for="JPY">Japanese yen</label>
+          <input
+            type="radio"
+            class="btn-check"
+            name="currency-selection"
+            id="JPY"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-secondary" for="JPY">
+            Japanese yen
+          </label>
 
-        <input
-          type="radio"
-          class="btn-check"
-          name="currency-selection"
-          id="UAH"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-secondary" for="UAH">
-          Ukrainian hryvnia
-        </label>
-      </div>
+          <input
+            type="radio"
+            class="btn-check"
+            name="currency-selection"
+            id="UAH"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-secondary" for="UAH">
+            Ukrainian hryvnia
+          </label>
+        </div>
 
-      <form onsubmit="event.preventDefault(); bank(currency,userAmount.value)">
         <input
           class="form-control form-control-lg"
           type="number"
@@ -89,17 +94,15 @@
           id="userAmount"
           oninput="validity.valid||(value='')"
         />
+        <p class="py-4">
+          <button
+            type="submit"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+          >
+            Get Cash
+          </button>
+        </p>
       </form>
-
-      <p class="py-4">
-        <button
-          type="submit"
-          class="btn btn-lg btn-secondary fw-bold border-white bg-white"
-          onclick="bank(currency,userAmount.value)"
-        >
-          Get Cash
-        </button>
-      </p>
 
       <div id="cashWithdraw" class="mb-5"></div>
 
@@ -124,6 +127,6 @@
       </footer>
     </div>
 
-    <script src="./ATM simulator.js"></script>
+    <script src="./scripts.js"></script>
   </body>
 </html>
