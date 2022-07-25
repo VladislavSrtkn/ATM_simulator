@@ -46,10 +46,7 @@
         </p>
       </main>
 
-      <form
-        id="atm"
-        onsubmit="event.preventDefault(); processAtmFormSubmit(currency,userAmount.value)"
-      >
+      <form id="atm" onsubmit="event.preventDefault(); processAtmFormSubmit()">
         <div
           class="btn-group my-4 w-100"
           role="group"
@@ -70,6 +67,7 @@
             class="btn-check"
             name="currency-selection"
             id="JPY"
+            onclick="userAmount.value = '';"
             autocomplete="off"
           />
           <label class="btn btn-outline-secondary" for="JPY">

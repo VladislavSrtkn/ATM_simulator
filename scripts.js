@@ -33,36 +33,21 @@ const yenJapan = [
   { value: 1, count: 0 },
 ];
 
-const userAmount = document.querySelector('#userAmount');
-const cashWithdraw = document.getElementById('cashWithdraw');
-const currencySelectGroup = document.querySelector('.btn-group');
+const currencySelectionGroup = document.querySelector('.btn-group');
 
-currencySelectGroup.onclick = function clearUserAmountInput(event) {
-  let target = event.target;
-  if (target.className != 'btn-check') return;
+currencySelectionGroup.onclick = function clearUserAmountInput(event) {
+  if (event.target.className != 'btn-check') return;
   userAmount.value = '';
 };
 
 let currency;
 let currencyLabel;
 
-function selectCurrency() {
-  if (USD.checked) {
-    currency = dollarUSA;
-    currencyLabel = '$';
-  } else if (JPY.checked) {
-    currency = yenJapan;
-    currencyLabel = '¥';
-  } else if (UAH.checked) {
-    currency = hryvniaUkraine;
-    currencyLabel = '₴';
-  }
-  return currency, currencyLabel;
-}
+function processAtmFormSubmit() {
+  const cashWithdraw = document.getElementById('cashWithdraw');
 
-selectCurrency();
+  let amount = document.querySelector('#userAmount').value;
 
-function processAtmFormSubmit(currency, amount) {
   if (!amount || amount == 0) {
     errorMessage();
     return;
@@ -82,6 +67,16 @@ function errorMessage() {
 }
 
 function getBills(currency, amount) {
+  if (USD.checked) {
+    currency = dollarUSA;
+    currencyLabel = '$';
+  } else if (JPY.checked) {
+    currency = yenJapan;
+    currencyLabel = '¥';
+  } else if (UAH.checked) {
+    currency = hryvniaUkraine;
+    currencyLabel = '₴';
+  }
   const result = [];
 
   for (const note of currency) {
