@@ -33,43 +33,20 @@ const yenJapan = [
   { value: 1, count: 0 },
 ];
 
-let userAmount = document.querySelector('#userAmount');
-let cashWithdraw = document.getElementById('cashWithdraw');
-let atmForm = document.getElementById('atm');
+const userAmount = document.querySelector('#userAmount');
+const cashWithdraw = document.getElementById('cashWithdraw');
+const currencySelectGroup = document.querySelector('.btn-group');
+
+currencySelectGroup.onclick = function clearUserAmountInput(event) {
+  let target = event.target;
+  if (target.className != 'btn-check') return;
+  userAmount.value = '';
+};
 
 let currency;
 let currencyLabel;
 
-atmForm.onclick = function clearUserAmountInput(event) {
-  if (event.target.className != 'btn-check') return;
-  userAmount.value = '';
-};
-
-function errorMessage() {
-  let errorMessage = document.createElement('h3');
-  errorMessage.innerHTML = 'Error';
-  cashWithdraw.append(errorMessage);
-  throw new Error('error message');
-}
-
-function displayBills(result) {
-  for (const withdrawNotes of result) {
-    let container = document.createElement('h3');
-    container.innerHTML =
-      currencyLabel +
-      JSON.stringify(withdrawNotes.value) +
-      '  x  ' +
-      JSON.stringify(withdrawNotes.count);
-    cashWithdraw.append(container);
-  }
-  return result;
-}
-
-function getBills(currency, amount) {
-  if (!amount || amount == 0) {
-    errorMessage();
-  }
-
+function selectCurrency() {
   if (USD.checked) {
     currency = dollarUSA;
     currencyLabel = '$';
@@ -80,7 +57,32 @@ function getBills(currency, amount) {
     currency = hryvniaUkraine;
     currencyLabel = '₴';
   }
-  let result = [];
+  return currency, currencyLabel;
+}
+
+selectCurrency();
+
+function processAtmFormSubmit(currency, amount) {
+  if (!amount || amount == 0) {
+    errorMessage();
+    return;
+  }
+
+  getBills(currency, amount);
+  const result = getBills(currency, amount);
+
+  showBills(result);
+}
+
+function errorMessage() {
+  cashWithdraw.innerHTML = '';
+  let errorMessage = document.createElement('h3');
+  errorMessage.innerHTML = 'Error';
+  cashWithdraw.append(errorMessage);
+}
+
+function getBills(currency, amount) {
+  const result = [];
 
   for (const note of currency) {
     let value = note.value;
@@ -98,12 +100,22 @@ function getBills(currency, amount) {
   if (amount != 0) {
     errorMessage();
   }
-  displayBills(result);
 
   return result;
 }
 
-function processAtmFormSubmit(currency, amount) {
+function showBills(result) {
   cashWithdraw.innerHTML = '';
-  getBills(currency, amount);
+
+  for (const withdrawNotes of result) {
+    let container = document.createElement('h3');
+    container.innerHTML =
+      currencyLabel +
+      JSON.stringify(withdrawNotes.value) +
+      '  x  ' +
+      JSON.stringify(withdrawNotes.count);
+    cashWithdraw.append(container);
+  }
+
+  userAmount.value = '';
 }
