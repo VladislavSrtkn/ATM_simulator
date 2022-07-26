@@ -46,7 +46,7 @@
         </p>
       </main>
 
-      <form id="atm" onsubmit="event.preventDefault(); processAtmFormSubmit()">
+      <form id="atm">
         <div
           class="btn-group my-4 w-100"
           role="group"
@@ -57,6 +57,7 @@
             class="btn-check"
             name="currency-selection"
             id="USD"
+            value="dollarUSA"
             autocomplete="off"
             checked
           />
@@ -67,6 +68,7 @@
             class="btn-check"
             name="currency-selection"
             id="JPY"
+            value="yenJapan"
             onclick="userAmount.value = '';"
             autocomplete="off"
           />
@@ -79,6 +81,7 @@
             class="btn-check"
             name="currency-selection"
             id="UAH"
+            value="hryvniaUkraine"
             autocomplete="off"
           />
           <label class="btn btn-outline-secondary" for="UAH">
@@ -90,6 +93,7 @@
           class="form-control form-control-lg"
           type="number"
           placeholder="100"
+          name="userAmount"
           id="userAmount"
           oninput="validity.valid||(value='')"
         />

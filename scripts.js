@@ -40,24 +40,28 @@ currencySelectionGroup.onclick = function clearUserAmountInput(event) {
   userAmount.value = '';
 };
 
-let currency;
 let currencyLabel;
 
-function processAtmFormSubmit() {
-  const cashWithdraw = document.getElementById('cashWithdraw');
-
-  let amount = document.querySelector('#userAmount').value;
+function processAtmFormSubmit(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const amount = formData.get('userAmount');
 
   if (!amount || amount == 0) {
     errorMessage();
     return;
   }
 
+  const currency = formData.get('currency-selection');
+
   getBills(currency, amount);
+
   const result = getBills(currency, amount);
 
   showBills(result);
 }
+
+document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);
 
 function errorMessage() {
   cashWithdraw.innerHTML = '';
@@ -67,16 +71,17 @@ function errorMessage() {
 }
 
 function getBills(currency, amount) {
-  if (USD.checked) {
+  if (currency == 'dollarUSA') {
     currency = dollarUSA;
     currencyLabel = '$';
-  } else if (JPY.checked) {
+  } else if (currency == 'yenJapan') {
     currency = yenJapan;
     currencyLabel = '¥';
-  } else if (UAH.checked) {
+  } else if (currency == 'hryvniaUkraine') {
     currency = hryvniaUkraine;
     currencyLabel = '₴';
   }
+
   const result = [];
 
   for (const note of currency) {
