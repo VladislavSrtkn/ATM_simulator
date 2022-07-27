@@ -111,5 +111,14 @@ function showBills(result) {
     cashWithdraw.append(container);
   }
 
-  userAmount.value = '';
+  document.getElementById('userAmount').value = '';
 }
+
+function clearAmountInput(event) {
+  document.getElementById('userAmount').value = '';
+}
+document
+  .querySelectorAll("input[name='currency-selection']")
+  .forEach((input) => {
+    input.addEventListener('change', clearAmountInput);
+  });
