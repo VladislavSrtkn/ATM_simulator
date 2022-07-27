@@ -33,29 +33,20 @@ const yenJapan = [
   { value: 1, count: 0 },
 ];
 
-const currencySelectionGroup = document.querySelector('.btn-group');
-
-currencySelectionGroup.onclick = function clearUserAmountInput(event) {
-  if (event.target.className != 'btn-check') return;
-  userAmount.value = '';
-};
-
-let currencyLabel;
-
 function processAtmFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const amount = formData.get('userAmount');
+  const selectedCurrency = formData.get('currency-selection');
 
   if (!amount || amount == 0) {
     errorMessage();
     return;
   }
 
-  const currency = formData.get('currency-selection');
+  currencySelection(selectedCurrency);
 
   getBills(currency, amount);
-
   const result = getBills(currency, amount);
 
   showBills(result);
@@ -65,29 +56,32 @@ document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);
 
 function errorMessage() {
   cashWithdraw.innerHTML = '';
-  let errorMessage = document.createElement('h3');
+  const errorMessage = document.createElement('h3');
   errorMessage.innerHTML = 'Error';
   cashWithdraw.append(errorMessage);
 }
 
-function getBills(currency, amount) {
-  if (currency == 'dollarUSA') {
+function currencySelection(selectedCurrency) {
+  if (selectedCurrency == 'dollarUSA') {
     currency = dollarUSA;
     currencyLabel = '$';
-  } else if (currency == 'yenJapan') {
+  } else if (selectedCurrency == 'yenJapan') {
     currency = yenJapan;
     currencyLabel = '¥';
-  } else if (currency == 'hryvniaUkraine') {
+  } else if (selectedCurrency == 'hryvniaUkraine') {
     currency = hryvniaUkraine;
     currencyLabel = '₴';
   }
+  return currency, currencyLabel;
+}
 
+function getBills(currency, amount) {
   const result = [];
 
   for (const note of currency) {
-    let value = note.value;
+    const value = note.value;
     let count = note.count;
-    let numberForCurrentNote = Math.floor(amount / value);
+    const numberForCurrentNote = Math.floor(amount / value);
 
     count = numberForCurrentNote;
     amount -= numberForCurrentNote * value;
@@ -108,7 +102,7 @@ function showBills(result) {
   cashWithdraw.innerHTML = '';
 
   for (const withdrawNotes of result) {
-    let container = document.createElement('h3');
+    const container = document.createElement('h3');
     container.innerHTML =
       currencyLabel +
       JSON.stringify(withdrawNotes.value) +
