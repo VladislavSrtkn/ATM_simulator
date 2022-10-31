@@ -5,7 +5,11 @@ function processAtmFormSubmit(event) {
   const selectedCurrency = formData.get('currency-selection');
 
   if (!amount || amount == 0) {
-    errorMessage();
+    errorMessage('Please enter amount you want to withdraw');
+    return;
+  }
+
+  if (checkAmountLimits(selectedCurrency, amount)) {
     return;
   }
 
@@ -15,15 +19,32 @@ function processAtmFormSubmit(event) {
   const result = getBills(currencyBills, amount);
 
   showBills(result, currencyLabel);
+  clearAmountInput();
 }
 
 document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);
 
-function errorMessage() {
+function errorMessage(message) {
   cashWithdraw.innerHTML = '';
   const errorMessage = document.createElement('h3');
-  errorMessage.innerHTML = 'Error';
+  errorMessage.innerHTML = message;
   cashWithdraw.append(errorMessage);
+}
+
+function checkAmountLimits(currency, amount) {
+  const withdrawLimits = {
+    USD: 2000,
+    JPY: 300000,
+    UAH: 70000,
+  };
+
+  if (amount > withdrawLimits[currency]) {
+    clearAmountInput();
+    errorMessage(
+      `Сash withdrawal limit ${withdrawLimits[currency]} ${currency}`
+    );
+    return true;
+  } else return false;
 }
 
 function getCurrencyLabel(currency) {
@@ -89,9 +110,6 @@ function getBills(currency, amount) {
     }
   }
 
-  if (amount != 0) {
-    errorMessage();
-  }
   return result;
 }
 
@@ -108,8 +126,6 @@ function showBills(result, label) {
 
     cashWithdraw.append(container);
   }
-
-  document.getElementById('userAmount').value = '';
 }
 
 function clearAmountInput() {
