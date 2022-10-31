@@ -5,6 +5,10 @@
   text-shadow: none; /*Prevent inheritance from `body`*/
 }
 
+.btn-outline-secondary {
+  width: 33.33%;
+}
+
 .btn-group > .btn-check:checked + .btn {
   color: #e5d504;
 }
@@ -68,8 +72,4 @@ h1 {
 .nav-masthead .active {
   color: #fff;
   border-bottom-color: #fff;
-}
-
-.btn-outline-secondary {
-  width: 33.33%;
 }
