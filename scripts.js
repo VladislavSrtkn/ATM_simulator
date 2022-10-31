@@ -1,38 +1,3 @@
-const dollarUSA = [
-  { value: 100, count: 0 },
-  { value: 50, count: 0 },
-  { value: 20, count: 0 },
-  { value: 10, count: 0 },
-  { value: 5, count: 0 },
-  { value: 2, count: 0 },
-  { value: 1, count: 0 },
-];
-
-const hryvniaUkraine = [
-  { value: 500, count: 0 },
-  { value: 200, count: 0 },
-  { value: 100, count: 0 },
-  { value: 50, count: 0 },
-  { value: 20, count: 0 },
-  { value: 10, count: 0 },
-  { value: 5, count: 0 },
-  { value: 2, count: 0 },
-  { value: 1, count: 0 },
-];
-
-const yenJapan = [
-  { value: 10000, count: 0 },
-  { value: 5000, count: 0 },
-  { value: 2000, count: 0 },
-  { value: 1000, count: 0 },
-  { value: 500, count: 0 },
-  { value: 100, count: 0 },
-  { value: 50, count: 0 },
-  { value: 10, count: 0 },
-  { value: 5, count: 0 },
-  { value: 1, count: 0 },
-];
-
 function processAtmFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -44,12 +9,12 @@ function processAtmFormSubmit(event) {
     return;
   }
 
-  currencySelection(selectedCurrency);
+  const currencyBills = getCurrencyBills(selectedCurrency);
+  const currencyLabel = getCurrencyLabel(selectedCurrency);
 
-  getBills(currency, amount);
-  const result = getBills(currency, amount);
+  const result = getBills(currencyBills, amount);
 
-  showBills(result);
+  showBills(result, currencyLabel);
 }
 
 document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);
@@ -61,18 +26,53 @@ function errorMessage() {
   cashWithdraw.append(errorMessage);
 }
 
-function currencySelection(selectedCurrency) {
-  if (selectedCurrency == 'dollarUSA') {
-    currency = dollarUSA;
-    currencyLabel = '$';
-  } else if (selectedCurrency == 'yenJapan') {
-    currency = yenJapan;
-    currencyLabel = '¥';
-  } else if (selectedCurrency == 'hryvniaUkraine') {
-    currency = hryvniaUkraine;
-    currencyLabel = '₴';
-  }
-  return currency, currencyLabel;
+function getCurrencyLabel(currency) {
+  const currencyLabels = {
+    USD: '$',
+    JPY: '¥',
+    UAH: '₴',
+  };
+
+  return currencyLabels[currency];
+}
+
+function getCurrencyBills(currency) {
+  const currencyBills = {
+    USD: [
+      { value: 100 },
+      { value: 50 },
+      { value: 20 },
+      { value: 10 },
+      { value: 5 },
+      { value: 2 },
+      { value: 1 },
+    ],
+    JPY: [
+      { value: 10000 },
+      { value: 5000 },
+      { value: 2000 },
+      { value: 1000 },
+      { value: 500 },
+      { value: 100 },
+      { value: 50 },
+      { value: 10 },
+      { value: 5 },
+      { value: 1 },
+    ],
+    UAH: [
+      { value: 500 },
+      { value: 200 },
+      { value: 100 },
+      { value: 50 },
+      { value: 20 },
+      { value: 10 },
+      { value: 5 },
+      { value: 2 },
+      { value: 1 },
+    ],
+  };
+
+  return currencyBills[currency];
 }
 
 function getBills(currency, amount) {
@@ -80,11 +80,9 @@ function getBills(currency, amount) {
 
   for (const note of currency) {
     const value = note.value;
-    let count = note.count;
-    const numberForCurrentNote = Math.floor(amount / value);
+    let count = Math.floor(amount / value);
 
-    count = numberForCurrentNote;
-    amount -= numberForCurrentNote * value;
+    amount -= count * value;
 
     if (count > 0) {
       result.push({ value, count });
@@ -94,29 +92,30 @@ function getBills(currency, amount) {
   if (amount != 0) {
     errorMessage();
   }
-
   return result;
 }
 
-function showBills(result) {
+function showBills(result, label) {
   cashWithdraw.innerHTML = '';
 
   for (const withdrawNotes of result) {
     const container = document.createElement('h3');
     container.innerHTML =
-      currencyLabel +
+      label +
       JSON.stringify(withdrawNotes.value) +
       '  x  ' +
       JSON.stringify(withdrawNotes.count);
+
     cashWithdraw.append(container);
   }
 
   document.getElementById('userAmount').value = '';
 }
 
-function clearAmountInput(event) {
+function clearAmountInput() {
   document.getElementById('userAmount').value = '';
 }
+
 document
   .querySelectorAll("input[name='currency-selection']")
   .forEach((input) => {
