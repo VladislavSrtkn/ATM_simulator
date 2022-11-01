@@ -18,17 +18,26 @@ function processAtmFormSubmit(event) {
 
   const result = getBills(currencyBills, amount);
 
+  saveWithdrawHistory(amount, currencyLabel);
+
   showBills(result, currencyLabel);
   clearAmountInput();
 }
 
 document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);
 
+document
+  .querySelectorAll("input[name='currency-selection']")
+  .forEach((input) => {
+    input.addEventListener('change', clearAmountInput);
+  });
+
 function errorMessage(message) {
-  cashWithdraw.innerHTML = '';
+  const showResultContainer = document.getElementById('cashWithdraw');
+  showResultContainer.innerHTML = '';
   const errorMessage = document.createElement('h3');
   errorMessage.innerHTML = message;
-  cashWithdraw.append(errorMessage);
+  showResultContainer.append(errorMessage);
 }
 
 function checkAmountLimits(currency, amount) {
@@ -114,7 +123,8 @@ function getBills(currency, amount) {
 }
 
 function showBills(result, label) {
-  cashWithdraw.innerHTML = '';
+  const showResultContainer = document.getElementById('cashWithdraw');
+  showResultContainer.innerHTML = '';
 
   for (const withdrawNotes of result) {
     const container = document.createElement('h3');
@@ -124,7 +134,7 @@ function showBills(result, label) {
       '  x  ' +
       JSON.stringify(withdrawNotes.count);
 
-    cashWithdraw.append(container);
+    showResultContainer.append(container);
   }
 }
 
@@ -132,8 +142,15 @@ function clearAmountInput() {
   document.getElementById('userAmount').value = '';
 }
 
-document
-  .querySelectorAll("input[name='currency-selection']")
-  .forEach((input) => {
-    input.addEventListener('change', clearAmountInput);
-  });
+function saveWithdrawHistory(amount, currency) {
+  const operationTime = new Date();
+  const operationDetails = `${operationTime.getDate()}/${
+    operationTime.getMonth() + 1
+  }/${operationTime.getFullYear()} ${operationTime.getHours()}:${
+    operationTime.getMinutes() > 9
+      ? operationTime.getMinutes()
+      : '0' + operationTime.getMinutes()
+  } withdrawal operation, amount ${currency} ${amount} `;
+
+  localStorage.setItem(localStorage.length, operationDetails);
+}

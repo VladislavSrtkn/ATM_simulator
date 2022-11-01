@@ -18,6 +18,10 @@ h3 {
   color: #e5d504;
 }
 
+.history {
+  border-bottom: 1px solid #fff;
+}
+
 #cashWithdraw h3 {
   opacity: 0;
   animation: animation 2.5s forwards;

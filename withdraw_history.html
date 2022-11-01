@@ -26,14 +26,14 @@
           <h2 class="float-md-start mb-4">Just a bank</h2>
           <nav class="nav nav-masthead justify-content-center float-md-end">
             <a
-              class="nav-link fw-bold py-1 px-0 active"
+              class="nav-link fw-bold py-1 px-0"
               aria-current="page"
               href="./index.html"
             >
               Home
             </a>
             <a
-              class="nav-link fw-bold py-1 px-0"
+              class="nav-link fw-bold py-1 px-0 active"
               href="./withdraw_history.html"
             >
               History
@@ -44,74 +44,21 @@
       </header>
 
       <main class="px-3 mt-4">
-        <h1>ATM</h1>
+        <h1>Operations history</h1>
         <p class="lead">
-          Please select a currency from the list below and enter the amount. ATM
-          only accepts banknotes.
+          Below is a history of your transactions. If you want to clear history,
+          click the button.
         </p>
+        <button
+          id="clear-hist-btn"
+          type="button"
+          class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+        >
+          clear history
+        </button>
       </main>
 
-      <form id="atm">
-        <div
-          class="btn-group my-4 w-100"
-          role="group"
-          aria-label="Basic radio toggle button group"
-        >
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="USD"
-            value="USD"
-            autocomplete="off"
-            checked
-          />
-          <label class="btn btn-outline-secondary" for="USD">US dollar</label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="JPY"
-            value="JPY"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="JPY">
-            Japanese yen
-          </label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="UAH"
-            value="UAH"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="UAH">
-            Ukrainian hryvnia
-          </label>
-        </div>
-
-        <input
-          class="form-control form-control-lg"
-          type="number"
-          placeholder="0"
-          name="userAmount"
-          id="userAmount"
-          oninput="validity.valid||(value='')"
-        />
-        <p class="py-4">
-          <button
-            type="submit"
-            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
-          >
-            Get Cash
-          </button>
-        </p>
-      </form>
-
-      <div id="cashWithdraw" class="mb-5"></div>
+      <div id="history"></div>
 
       <footer class="mt-auto text-white-50">
         <p>
@@ -134,6 +81,6 @@
       </footer>
     </div>
 
-    <script src="./scripts.js"></script>
+    <script src="./withdraw_history.js"></script>
   </body>
 </html>
