@@ -154,3 +154,48 @@ function saveWithdrawHistory(amount, currency) {
 
   localStorage.setItem(localStorage.length, operationDetails);
 }
+
+// Exchange rate from rest API
+function clearExchangeRateCont() {
+  document.getElementById('exchange-rate-container').innerHTML = '';
+}
+
+async function getExchangeRate(currency) {
+  const response = await fetch(
+    `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/${currency}.json`
+  );
+  const rate = await response.json();
+
+  return rate;
+}
+
+function showExchangeRate(event) {
+  clearExchangeRateCont();
+
+  const input = event.target;
+  const currency = input.value.toLowerCase();
+
+  if (currency == 'usd') {
+    return;
+  }
+
+  const showExcngRateContainer = document.getElementById(
+    'exchange-rate-container'
+  );
+  const showExcngRateP = document.createElement('p');
+
+  getExchangeRate(currency).then(
+    (result) =>
+      (showExcngRateP.innerHTML = `Current exchange rate: 1 USD = ${result[
+        currency
+      ].toFixed(2)} ${currency.toUpperCase()}. Last update ${result['date']}`)
+  );
+
+  showExcngRateContainer.append(showExcngRateP);
+}
+
+document
+  .querySelectorAll("input[name='currency-selection']")
+  .forEach((input) => {
+    input.addEventListener('change', showExchangeRate);
+  });
