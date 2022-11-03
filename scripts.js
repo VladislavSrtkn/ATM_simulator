@@ -5,11 +5,11 @@ function processAtmFormSubmit(event) {
   const selectedCurrency = formData.get('currency-selection');
 
   if (!amount || amount == 0) {
-    errorMessage('Please enter amount you want to withdraw');
+    showErrorMessage('Please enter amount you want to withdraw');
     return;
   }
 
-  if (checkAmountLimits(selectedCurrency, amount)) {
+  if (!checkAmountIsWithinLimit(selectedCurrency, amount)) {
     return;
   }
 
@@ -32,7 +32,7 @@ document
     input.addEventListener('change', clearAmountInput);
   });
 
-function errorMessage(message) {
+function showErrorMessage(message) {
   const showResultContainer = document.getElementById('cashWithdraw');
   showResultContainer.innerHTML = '';
   const errorMessage = document.createElement('h3');
@@ -40,7 +40,7 @@ function errorMessage(message) {
   showResultContainer.append(errorMessage);
 }
 
-function checkAmountLimits(currency, amount) {
+function checkAmountIsWithinLimit(currency, amount) {
   const withdrawLimits = {
     USD: 2000,
     JPY: 300000,
@@ -49,11 +49,11 @@ function checkAmountLimits(currency, amount) {
 
   if (amount > withdrawLimits[currency]) {
     clearAmountInput();
-    errorMessage(
+    showErrorMessage(
       `Сash withdrawal limit ${withdrawLimits[currency]} ${currency}`
     );
-    return true;
-  } else return false;
+    return false;
+  } else return true;
 }
 
 function getCurrencyLabel(currency) {
@@ -129,10 +129,7 @@ function showBills(result, label) {
   for (const withdrawNotes of result) {
     const container = document.createElement('h3');
     container.innerHTML =
-      label +
-      JSON.stringify(withdrawNotes.value) +
-      '  x  ' +
-      JSON.stringify(withdrawNotes.count);
+      label + withdrawNotes.value + '  x  ' + withdrawNotes.count;
 
     showResultContainer.append(container);
   }
@@ -182,7 +179,7 @@ function showExchangeRate(event) {
   const showExcngRateContainer = document.getElementById(
     'exchange-rate-container'
   );
-  const showExcngRateP = document.createElement('p');
+  const showExcngRateP = document.createElement('span');
 
   getExchangeRate(currency).then(
     (result) =>
