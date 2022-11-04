@@ -1,3 +1,5 @@
+import format from 'date-fns/format';
+
 function processAtmFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -140,16 +142,22 @@ function clearAmountInput() {
 }
 
 function saveWithdrawHistory(amount, currency) {
-  const operationTime = new Date();
-  const operationDetails = `${operationTime.getDate()}/${
-    operationTime.getMonth() + 1
-  }/${operationTime.getFullYear()} ${operationTime.getHours()}:${
-    operationTime.getMinutes() > 9
-      ? operationTime.getMinutes()
-      : '0' + operationTime.getMinutes()
-  } withdrawal operation, amount ${currency} ${amount} `;
+  const operationDetailsObj = {
+    date: format(new Date(), 'eee MMM dd, y  kk:mm'),
+    currency: currency,
+    amount: amount,
+  };
 
-  localStorage.setItem(localStorage.length, operationDetails);
+  const currentHistory = localStorage.getItem('withdrawals');
+
+  if (currentHistory == null) {
+    localStorage.setItem('withdrawals', JSON.stringify(operationDetailsObj));
+  } else {
+    localStorage.setItem(
+      'withdrawals',
+      currentHistory + '-' + JSON.stringify(operationDetailsObj)
+    );
+  }
 }
 
 // Exchange rate from rest API
@@ -185,7 +193,10 @@ function showExchangeRate(event) {
     (result) =>
       (showExcngRateP.innerHTML = `Current exchange rate: 1 USD = ${result[
         currency
-      ].toFixed(2)} ${currency.toUpperCase()}. Last update ${result['date']}`)
+      ].toFixed(2)} ${currency.toUpperCase()}. Updated ${format(
+        new Date(result['date']),
+        'eee MMM dd, y'
+      )}`)
   );
 
   showExcngRateContainer.append(showExcngRateP);

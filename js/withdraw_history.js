@@ -6,17 +6,26 @@ document
 
 function clearWithdrawHistory() {
   const showHistoryContainer = document.getElementById('history');
-  localStorage.clear();
+  localStorage.removeItem('withdrawals');
   showHistoryContainer.innerHTML = '';
 }
 
 function showWithdrawHistory() {
-  const showHistoryContainer = document.getElementById('history');
+  if (localStorage.getItem('withdrawals') == null) {
+    return;
+  }
 
-  for (let i = localStorage.length; i > 0; i--) {
+  const showHistoryContainer = document.getElementById('history');
+  const withdrawHistoryArray = localStorage.getItem('withdrawals').split('-');
+
+  for (let i = withdrawHistoryArray.length - 1; i >= 0; i--) {
+    const operationDetailsObj = JSON.parse(withdrawHistoryArray[i]);
+
     const container = document.createElement('p');
     container.classList.add('history', 'my-3', 'py-2');
-    container.innerHTML = localStorage.getItem(i - 1);
+
+    container.innerHTML = `${operationDetailsObj.date} withdrawal operation, amount ${operationDetailsObj.currency} ${operationDetailsObj.amount}`;
+
     showHistoryContainer.append(container);
   }
 }
