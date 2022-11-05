@@ -148,20 +148,18 @@ function saveWithdrawHistory(amount, currency) {
     amount: amount,
   };
 
-  const currentHistory = localStorage.getItem('withdrawals');
+  let withdrawHistoryArray =
+    localStorage.getItem('withdrawals') == null
+      ? []
+      : JSON.parse(localStorage.getItem('withdrawals'));
 
-  if (currentHistory == null) {
-    localStorage.setItem('withdrawals', JSON.stringify(operationDetailsObj));
-  } else {
-    localStorage.setItem(
-      'withdrawals',
-      currentHistory + '-' + JSON.stringify(operationDetailsObj)
-    );
-  }
+  withdrawHistoryArray.unshift(operationDetailsObj);
+
+  localStorage.setItem('withdrawals', JSON.stringify(withdrawHistoryArray));
 }
 
 // Exchange rate from rest API
-function clearExchangeRateCont() {
+function clearExchangeRateContainer() {
   document.getElementById('exchange-rate-container').innerHTML = '';
 }
 
@@ -175,7 +173,7 @@ async function getExchangeRate(currency) {
 }
 
 function showExchangeRate(event) {
-  clearExchangeRateCont();
+  clearExchangeRateContainer();
 
   const input = event.target;
   const currency = input.value.toLowerCase();
@@ -184,22 +182,25 @@ function showExchangeRate(event) {
     return;
   }
 
-  const showExcngRateContainer = document.getElementById(
+  const exchangeRateContainer = document.getElementById(
     'exchange-rate-container'
   );
-  const showExcngRateP = document.createElement('span');
+  const exchangeRateSpan = document.createElement('span');
 
-  getExchangeRate(currency).then(
-    (result) =>
-      (showExcngRateP.innerHTML = `Current exchange rate: 1 USD = ${result[
-        currency
-      ].toFixed(2)} ${currency.toUpperCase()}. Updated ${format(
-        new Date(result['date']),
-        'eee MMM dd, y'
-      )}`)
-  );
+  getExchangeRate(currency)
+    .then((result) => {
+      const currencyRate = result[currency].toFixed(2);
+      const currencyName = currency.toUpperCase();
+      const operationDate = format(new Date(result['date']), 'eee MMM dd, y');
 
-  showExcngRateContainer.append(showExcngRateP);
+      exchangeRateSpan.innerHTML = `Current exchange rate: 1 USD = ${currencyRate} ${currencyName}. Updated ${operationDate}`;
+    })
+    .catch(
+      () =>
+        (exchangeRateSpan.innerHTML = `Unable to load exchange rate data. Please try again later.`)
+    );
+
+  exchangeRateContainer.append(exchangeRateSpan);
 }
 
 document

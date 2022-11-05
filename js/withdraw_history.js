@@ -11,20 +11,19 @@ function clearWithdrawHistory() {
 }
 
 function showWithdrawHistory() {
-  if (localStorage.getItem('withdrawals') == null) {
+  const withdrawHxistoryArray = JSON.parse(localStorage.getItem('withdrawals'));
+
+  if (!withdrawHxistoryArray) {
     return;
   }
 
   const showHistoryContainer = document.getElementById('history');
-  const withdrawHistoryArray = localStorage.getItem('withdrawals').split('-');
 
-  for (let i = withdrawHistoryArray.length - 1; i >= 0; i--) {
-    const operationDetailsObj = JSON.parse(withdrawHistoryArray[i]);
-
+  for (const withdrawObj of withdrawHxistoryArray) {
     const container = document.createElement('p');
     container.classList.add('history', 'my-3', 'py-2');
 
-    container.innerHTML = `${operationDetailsObj.date} withdrawal operation, amount ${operationDetailsObj.currency} ${operationDetailsObj.amount}`;
+    container.innerHTML = `${withdrawObj.date} withdrawal operation, amount ${withdrawObj.currency} ${withdrawObj.amount}`;
 
     showHistoryContainer.append(container);
   }
