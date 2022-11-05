@@ -5,4 +5,5 @@ mix
   .js('./source/js/withdraw_history.js', 'withdraw_history.js')
   .setPublicPath('./dist');
 
-mix.css('./source/css/style.css', './dist').setPublicPath('./dist');
+mix.css('./source/css/templateBT.css', 'style.css').setPublicPath('./dist');
+mix.css('./source/css/custom.css', 'style.css').setPublicPath('./dist');

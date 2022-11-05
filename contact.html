@@ -26,7 +26,7 @@
           <h2 class="float-md-start mb-4">Just a bank</h2>
           <nav class="nav nav-masthead justify-content-center float-md-end">
             <a
-              class="nav-link fw-bold py-1 px-0 active"
+              class="nav-link fw-bold py-1 px-0"
               aria-current="page"
               href="./index.html"
             >
@@ -38,7 +38,7 @@
             >
               History
             </a>
-            <a class="nav-link fw-bold py-1 px-0" href="./contact.html">
+            <a class="nav-link fw-bold py-1 px-0 active" href="./contact.html">
               Contact
             </a>
           </nav>
@@ -46,76 +46,26 @@
       </header>
 
       <main class="px-3 mt-4">
-        <h1>ATM</h1>
-        <p class="lead">
-          Please select a currency from the list below and enter the amount. ATM
-          only accepts banknotes.
+        <h1 class="py-4">Contact the bank</h1>
+        <p class="lead py-4">
+          If you have any questions or feedback please email us.
         </p>
-      </main>
 
-      <form id="atm">
-        <div
-          class="btn-group mt-4 w-100"
-          role="group"
-          aria-label="Basic radio toggle button group"
-        >
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="USD"
-            value="USD"
-            autocomplete="off"
-            checked
-          />
-          <label class="btn btn-outline-secondary" for="USD">US dollar</label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="JPY"
-            value="JPY"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="JPY">
-            Japanese yen
-          </label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="currency-selection"
-            id="UAH"
-            value="UAH"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="UAH">
-            Ukrainian hryvnia
-          </label>
-        </div>
-
-        <div id="exchange-rate-container" class="my-3"></div>
-
-        <input
-          class="form-control form-control-lg"
-          type="number"
-          placeholder="0"
-          name="userAmount"
-          id="userAmount"
-          oninput="validity.valid||(value='')"
-        />
-        <p class="py-4">
-          <button
-            type="submit"
-            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+        <a id="maillink" href="mailto:justabank.feedback.example@mail.com">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="currentColor"
+            class="bi bi-envelope"
+            viewBox="0 0 16 16"
           >
-            Get Cash
-          </button>
-        </p>
-      </form>
-
-      <div id="cashWithdraw" class="mb-5"></div>
+            <path
+              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"
+            />
+          </svg>
+        </a>
+      </main>
 
       <footer class="mt-auto text-white-50">
         <p>
@@ -137,7 +87,5 @@
         </p>
       </footer>
     </div>
-
-    <script src="./dist/index.js"></script>
   </body>
 </html>

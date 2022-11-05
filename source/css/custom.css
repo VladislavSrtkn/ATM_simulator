@@ -1,0 +1,31 @@
+.btn-outline-secondary {
+  width: 33.33%;
+}
+
+.btn-group > .btn-check:checked + .btn,
+#maillink {
+  color: #e5d504;
+}
+
+h2,
+h3 {
+  color: #e5d504;
+}
+
+.history {
+  border-bottom: 1px solid #fff;
+}
+
+#cashWithdraw h3 {
+  opacity: 0;
+  animation: animation 2.5s forwards;
+}
+
+@keyframes animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
