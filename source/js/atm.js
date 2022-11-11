@@ -1,15 +1,12 @@
 import {
-  showErrorMessage,
-  checkAmountIsWithinLimit,
   getCurrencyLabel,
   getCurrencyBills,
   getBills,
-  showBills,
-  clearAmountInput,
+  getLimit,
 } from './atm_functions';
 
 import { saveWithdrawHistory } from './withdraw_history_functions';
-import { showExchangeRate } from './exchange_rate_functions';
+import { showExchangeRate } from './exchange_rate';
 
 function processAtmFormSubmit(event) {
   event.preventDefault();
@@ -35,6 +32,41 @@ function processAtmFormSubmit(event) {
 
   showBills(result, currencyLabel);
   clearAmountInput();
+}
+
+function showErrorMessage(message) {
+  const showResultContainer = document.getElementById('cashWithdraw');
+  showResultContainer.innerHTML = '';
+  const errorMessage = document.createElement('h3');
+  errorMessage.innerHTML = message;
+  showResultContainer.append(errorMessage);
+}
+
+function checkAmountIsWithinLimit(currency, amount) {
+  const limit = getLimit(currency);
+
+  if (amount > limit) {
+    clearAmountInput();
+    showErrorMessage(`Сash withdrawal limit ${limit} ${currency}`);
+    return false;
+  } else return true;
+}
+
+function showBills(result, label) {
+  const showResultContainer = document.getElementById('cashWithdraw');
+  showResultContainer.innerHTML = '';
+
+  for (const withdrawNotes of result) {
+    const container = document.createElement('h3');
+    container.innerHTML =
+      label + withdrawNotes.value + '  x  ' + withdrawNotes.count;
+
+    showResultContainer.append(container);
+  }
+}
+
+function clearAmountInput() {
+  document.getElementById('userAmount').value = '';
 }
 
 document.getElementById('atm').addEventListener('submit', processAtmFormSubmit);

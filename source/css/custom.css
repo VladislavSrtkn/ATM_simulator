@@ -3,7 +3,8 @@
 }
 
 .btn-group > .btn-check:checked + .btn,
-#maillink {
+#maillink,
+#historyListSVG {
   color: #e5d504;
 }
 

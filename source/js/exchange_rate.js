@@ -1,4 +1,5 @@
 export { showExchangeRate, getExchangeRate, clearExchangeRateContainer };
+
 import format from 'date-fns/format';
 
 function showExchangeRate(event) {

@@ -1,35 +1,13 @@
-export {
-  showErrorMessage,
-  checkAmountIsWithinLimit,
-  getCurrencyLabel,
-  getCurrencyBills,
-  getBills,
-  showBills,
-  clearAmountInput,
-};
+export { getCurrencyLabel, getCurrencyBills, getBills, getLimit };
 
-function showErrorMessage(message) {
-  const showResultContainer = document.getElementById('cashWithdraw');
-  showResultContainer.innerHTML = '';
-  const errorMessage = document.createElement('h3');
-  errorMessage.innerHTML = message;
-  showResultContainer.append(errorMessage);
-}
-
-function checkAmountIsWithinLimit(currency, amount) {
+function getLimit(currency) {
   const withdrawLimits = {
     USD: 2000,
     JPY: 300000,
     UAH: 70000,
   };
 
-  if (amount > withdrawLimits[currency]) {
-    clearAmountInput();
-    showErrorMessage(
-      `Сash withdrawal limit ${withdrawLimits[currency]} ${currency}`
-    );
-    return false;
-  } else return true;
+  return withdrawLimits[currency];
 }
 
 function getCurrencyLabel(currency) {
@@ -96,21 +74,4 @@ function getBills(currency, amount) {
   }
 
   return result;
-}
-
-function showBills(result, label) {
-  const showResultContainer = document.getElementById('cashWithdraw');
-  showResultContainer.innerHTML = '';
-
-  for (const withdrawNotes of result) {
-    const container = document.createElement('h3');
-    container.innerHTML =
-      label + withdrawNotes.value + '  x  ' + withdrawNotes.count;
-
-    showResultContainer.append(container);
-  }
-}
-
-function clearAmountInput() {
-  document.getElementById('userAmount').value = '';
 }
