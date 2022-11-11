@@ -29,7 +29,7 @@ function showWithdrawHistory() {
 
   notEmptyHistoryContainer.classList.remove('d-none');
 
-  const showHistoryContainer = document.getElementById('history');
+  const operationListContainer = document.getElementById('history');
 
   for (const withdrawObj of withdrawHistoryArray) {
     const container = document.createElement('p');
@@ -42,17 +42,17 @@ function showWithdrawHistory() {
 
     container.innerHTML = `${formattedDate} withdrawal operation, amount ${withdrawObj.currency} ${withdrawObj.amount}`;
 
-    showHistoryContainer.append(container);
+    operationListContainer.append(container);
   }
 }
 
 function clearWithdrawHistoryContainer() {
-  const showHistoryContainer = document.getElementById('history');
+  const operationListContainer = document.getElementById('history');
   const emptyHistoryContainer = document.getElementById('emptyHistory');
   const notEmptyHistoryContainer = document.getElementById('forShowHistory');
 
   emptyHistoryContainer.classList.remove('d-none');
   notEmptyHistoryContainer.classList.add('d-none');
 
-  showHistoryContainer.innerHTML = '';
+  operationListContainer.innerHTML = '';
 }
