@@ -9,7 +9,7 @@ import format from 'date-fns/format';
 
 function saveWithdrawHistory(amount, currency) {
   const operationDetailsObj = {
-    date: format(new Date(), 'eee MMM dd, y  kk:mm'),
+    date: new Date(),
     currency: currency,
     amount: amount,
   };
@@ -37,7 +37,12 @@ function showWithdrawHistory() {
     const container = document.createElement('p');
     container.classList.add('history', 'my-3', 'py-2');
 
-    container.innerHTML = `${withdrawObj.date} withdrawal operation, amount ${withdrawObj.currency} ${withdrawObj.amount}`;
+    const formattedDate = format(
+      new Date(withdrawObj.date),
+      'eee MMM dd, y  kk:mm'
+    );
+
+    container.innerHTML = `${formattedDate} withdrawal operation, amount ${withdrawObj.currency} ${withdrawObj.amount}`;
 
     showHistoryContainer.append(container);
   }

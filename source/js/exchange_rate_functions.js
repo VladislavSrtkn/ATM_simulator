@@ -24,10 +24,10 @@ function showExchangeRate(event) {
 
       exchangeRateSpan.innerHTML = `Current exchange rate: 1 USD = ${currencyRate} ${currencyName}. Updated ${operationDate}`;
     })
-    .catch(
-      () =>
-        (exchangeRateSpan.innerHTML = `Unable to load exchange rate data. Please try again later.`)
-    );
+    .catch((err) => {
+      exchangeRateSpan.innerHTML = `Unable to load exchange rate data. Please try again later.`;
+      console.log(err);
+    });
 
   exchangeRateContainer.append(exchangeRateSpan);
 }

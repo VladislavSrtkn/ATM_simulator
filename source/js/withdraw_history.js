@@ -1,7 +1,7 @@
 import {
   showWithdrawHistory,
   clearWithdrawHistory,
-} from './withdraw_history_scripts';
+} from './withdraw_history_functions';
 
 document.addEventListener('DOMContentLoaded', showWithdrawHistory);
 
