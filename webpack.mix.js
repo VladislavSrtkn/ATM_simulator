@@ -5,5 +5,6 @@ mix.setPublicPath('./dist');
 mix.js('source/js/atm.js', 'index.js');
 mix.js('./source/js/withdraw_history.js', 'withdraw_history.js');
 
+mix.css('./node_modules/bootstrap/dist/css/bootstrap.css', 'style.css');
 mix.css('./source/css/templateBT.css', 'style.css');
 mix.css('./source/css/custom.css', 'style.css');
