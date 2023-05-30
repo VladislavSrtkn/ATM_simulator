@@ -12,9 +12,7 @@ function showExchangeRate(event) {
     return;
   }
 
-  const exchangeRateContainer = document.getElementById(
-    'exchange-rate-container'
-  );
+  const exchangeRateContainer = document.getElementById('exchange-rate-container');
   const exchangeRateSpan = document.createElement('span');
 
   getExchangeRate(currency)
@@ -27,7 +25,7 @@ function showExchangeRate(event) {
     })
     .catch((err) => {
       exchangeRateSpan.innerHTML = `Unable to load exchange rate data. Please try again later.`;
-      console.log(err);
+      console.log('Error: ' + err);
     });
 
   exchangeRateContainer.append(exchangeRateSpan);

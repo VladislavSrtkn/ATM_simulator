@@ -22,6 +22,10 @@ h3 {
   animation: animation 2.5s forwards;
 }
 
+.min-h-100 {
+  min-height: 100%;
+}
+
 @keyframes animation {
   0% {
     opacity: 0;

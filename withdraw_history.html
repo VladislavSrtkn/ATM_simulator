@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,34 +7,18 @@
     <title>ATM Simulator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kanit&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./dist/style.css" />
   </head>
-  <body class="d-flex text-center text-bg-dark">
+  <body class="d-flex text-center text-bg-dark min-h-100">
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
       <header class="mb-4">
         <div>
           <h2 class="float-md-start mb-4">Just a bank</h2>
           <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a
-              class="nav-link fw-bold py-1 px-0"
-              aria-current="page"
-              href="./index.html"
-            >
-              Home
-            </a>
-            <a
-              class="nav-link fw-bold py-1 px-0 active"
-              href="./withdraw_history.html"
-            >
-              History
-            </a>
-            <a class="nav-link fw-bold py-1 px-0" href="./contact.html">
-              Contact
-            </a>
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="./index.html">Home</a>
+            <a class="nav-link fw-bold py-1 px-0 active" href="./withdraw_history.html">History</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./contact.html">Contact</a>
           </nav>
         </div>
       </header>
@@ -42,9 +26,7 @@
       <main class="px-3 mt-4">
         <h1 class="py-4">Operations history</h1>
         <div id="emptyHistory" class="d-none">
-          <p class="lead py-4">
-            The history of your transactions will be displayed here.
-          </p>
+          <p class="lead py-4">The history of your transactions will be displayed here.</p>
           <svg
             id="historyListSVG"
             xmlns="http://www.w3.org/2000/svg"
@@ -70,8 +52,7 @@
 
         <div id="forShowHistory" class="d-none">
           <p class="lead">
-            Below is a history of your transactions. If you want to clear
-            history, click the button.
+            Below is a history of your transactions. If you want to clear history, click the button.
           </p>
           <button
             id="clear-hist-btn"
@@ -88,19 +69,11 @@
       <footer class="mt-auto text-white-50">
         <p>
           Made by
-          <a
-            href="https://github.com/VladislavSrtkn"
-            class="text-white text-decoration-none"
-          >
+          <a href="https://github.com/VladislavSrtkn" class="text-white text-decoration-none">
             Vladislav Sirotkin
           </a>
           on
-          <a
-            href="https://getbootstrap.com/"
-            class="text-white text-decoration-none"
-          >
-            Bootstrap
-          </a>
+          <a href="https://getbootstrap.com/" class="text-white text-decoration-none">Bootstrap</a>
           template.
         </p>
       </footer>
