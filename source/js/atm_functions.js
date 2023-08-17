@@ -4,7 +4,7 @@ function getLimit(currency) {
   const withdrawLimits = {
     USD: 2000,
     JPY: 300000,
-    UAH: 70000,
+    RUB: 250000,
   };
 
   return withdrawLimits[currency];
@@ -14,7 +14,7 @@ function getCurrencyLabel(currency) {
   const currencyLabels = {
     USD: '$',
     JPY: '¥',
-    UAH: '₴',
+    RUB: '₽',
   };
 
   return currencyLabels[currency];
@@ -43,12 +43,14 @@ function getCurrencyBills(currency) {
       { value: 5 },
       { value: 1 },
     ],
-    UAH: [
+    RUB: [
+      { value: 5000 },
+      { value: 2000 },
+      { value: 1000 },
       { value: 500 },
       { value: 200 },
       { value: 100 },
       { value: 50 },
-      { value: 20 },
       { value: 10 },
       { value: 5 },
       { value: 2 },
